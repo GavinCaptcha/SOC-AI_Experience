@@ -2,6 +2,7 @@ const form = document.getElementById("name-form");
 const loginScreen = document.getElementById("login-screen");
 const choiceScreen = document.getElementById("choice-screen");
 const userName = document.getElementById("user-name");
+const animatedTerm = document.getElementById("animated-term");
 const manaValue = document.getElementById("mana-value");
 const manaFill = document.getElementById("mana-fill");
 const progressBoxes = Array.from(document.querySelectorAll(".progress-box"));
@@ -19,6 +20,7 @@ function renderMana() {
   if (manaFill) {
     manaFill.style.width = `${safeMana}%`;
   }
+  document.body.style.setProperty("--knowledge-progress", String(safeMana / maxMana));
 
   if (safeMana >= maxMana && fifthPath) {
     fifthPath.classList.remove("hidden");
@@ -40,6 +42,42 @@ if (form && loginScreen && choiceScreen && userName) {
     choiceScreen.classList.remove("hidden");
     document.body.classList.add("red-mode");
   });
+}
+
+if (animatedTerm) {
+  const terms = ["AI?", "LLMs?", "Artificial Intelligence?", "ChatGPT?", "Claude?"];
+  let termIndex = 1;
+  let charIndex = terms[0].length;
+  let isDeleting = true;
+
+  function tickTyping() {
+    const currentTerm = terms[termIndex];
+
+    if (isDeleting) {
+      charIndex = Math.max(0, charIndex - 1);
+      animatedTerm.textContent = currentTerm.slice(0, charIndex);
+      if (charIndex === 0) {
+        isDeleting = false;
+        termIndex = (termIndex + 1) % terms.length;
+        window.setTimeout(tickTyping, 320);
+        return;
+      }
+      window.setTimeout(tickTyping, 80);
+      return;
+    }
+
+    const nextTerm = terms[termIndex];
+    charIndex = Math.min(nextTerm.length, charIndex + 1);
+    animatedTerm.textContent = nextTerm.slice(0, charIndex);
+    if (charIndex === nextTerm.length) {
+      isDeleting = true;
+      window.setTimeout(tickTyping, 950);
+      return;
+    }
+    window.setTimeout(tickTyping, 95);
+  }
+
+  window.setTimeout(tickTyping, 800);
 }
 
 progressBoxes.forEach((box) => {

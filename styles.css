@@ -1,5 +1,6 @@
 :root {
   --bg: #060806;
+  --knowledge-progress: 0;
   --edge-glow: rgba(121, 255, 158, 0.55);
   --edge-glow-soft: rgba(121, 255, 158, 0.22);
   --red-hue: rgba(255, 72, 72, 0.45);
@@ -50,6 +51,29 @@ body {
     0 0 22px rgba(121, 255, 158, 0.25);
 }
 
+.animated-term {
+  display: inline-block;
+  min-width: 3.4ch;
+  color: #e8fff0;
+  text-shadow:
+    0 0 8px rgba(160, 255, 188, 0.58),
+    0 0 20px rgba(160, 255, 188, 0.3);
+  border-right: 2px solid rgba(198, 255, 214, 0.85);
+  padding-right: 0.15rem;
+  animation: blinkCursor 0.9s steps(1, end) infinite;
+}
+
+@keyframes blinkCursor {
+  0%,
+  49% {
+    border-right-color: rgba(198, 255, 214, 0.85);
+  }
+  50%,
+  100% {
+    border-right-color: transparent;
+  }
+}
+
 body::before {
   content: "";
   position: absolute;
@@ -64,6 +88,20 @@ body::before {
   animation: pulseGlow 4.2s ease-in-out infinite;
   z-index: -1;
   transition: background 450ms ease, filter 450ms ease;
+}
+
+body::after {
+  content: "";
+  position: absolute;
+  inset: -6vmax;
+  pointer-events: none;
+  background:
+    radial-gradient(120vmax 60vmax at 50% 85%, rgba(78, 176, 110, 0.7), transparent 68%),
+    radial-gradient(80vmax 42vmax at 50% 60%, rgba(126, 205, 146, 0.55), transparent 70%);
+  opacity: calc(var(--knowledge-progress) * 0.42);
+  filter: blur(24px) saturate(110%);
+  z-index: -1;
+  transition: opacity 420ms ease;
 }
 
 body.red-mode::before {
@@ -189,7 +227,7 @@ body.red-mode::before {
   display: grid;
   gap: 1.1rem;
   justify-items: center;
-  padding: 1rem;
+  padding: 1rem 1rem 6.8rem;
 }
 
 .choice-title {
@@ -209,15 +247,20 @@ body.red-mode::before {
 }
 
 .journey-panel {
+  position: fixed;
+  left: 50%;
+  bottom: 1.2rem;
+  transform: translateX(-50%);
   width: min(94vw, 760px);
-  background: linear-gradient(180deg, rgba(36, 14, 14, 0.92), rgba(22, 10, 10, 0.94));
-  border: 1px solid rgba(255, 115, 115, 0.35);
+  background: linear-gradient(180deg, rgba(65, 71, 69, 0.98), rgba(44, 48, 47, 0.98));
+  border: 1px solid rgba(160, 210, 176, 0.5);
   border-radius: 12px;
   padding: 0.75rem 0.9rem 0.9rem;
   box-shadow:
-    0 0 0 1px rgba(255, 90, 90, 0.15),
-    0 0 20px rgba(132, 25, 25, 0.3),
+    0 0 0 1px rgba(118, 170, 135, 0.28),
+    0 0 18px rgba(76, 129, 98, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  z-index: 5;
 }
 
 .journey-head {
@@ -231,11 +274,11 @@ body.red-mode::before {
 .mana-count {
   margin: 0;
   font-size: 0.9rem;
-  color: #ffdada;
+  color: #deeee3;
 }
 
 .mana-count {
-  color: #ffbcbc;
+  color: #caead3;
   font-weight: 600;
 }
 
@@ -244,18 +287,18 @@ body.red-mode::before {
   width: 100%;
   height: 12px;
   border-radius: 999px;
-  background: rgba(24, 8, 8, 0.85);
-  border: 1px solid rgba(255, 120, 120, 0.3);
+  background: rgba(30, 34, 33, 0.94);
+  border: 1px solid rgba(159, 195, 170, 0.45);
   overflow: hidden;
 }
 
 .mana-fill {
   width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, #9e1f1f, #ff5f5f);
+  background: linear-gradient(90deg, #4e8f64, #7cd99b);
   box-shadow:
-    0 0 10px rgba(255, 91, 91, 0.7),
-    0 0 16px rgba(255, 91, 91, 0.45);
+    0 0 10px rgba(124, 217, 155, 0.58),
+    0 0 16px rgba(124, 217, 155, 0.35);
   transition: width 280ms ease;
 }
 
