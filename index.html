@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Name Login</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <section class="page-content" id="login-screen" role="main">
+    <h1 class="project-title">What Does Your Professor Think of AI?</h1>
+    <main class="login-box">
+      <h2>Shall we find out together?</h2>
+      <form class="name-form" id="name-form" action="#" method="post">
+        <label for="name">Enter your name</label>
+        <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required />
+        <button type="submit">Continue</button>
+      </form>
+    </main>
+  </section>
+  <section class="choice-screen hidden" id="choice-screen" aria-live="polite">
+    <h2 class="choice-title">Choose a Path, <span id="user-name">Visitor</span></h2>
+    <div class="choice-grid">
+      <button class="choice-box" type="button">Curious</button>
+      <button class="choice-box" type="button">Skeptical</button>
+      <button class="choice-box" type="button">Optimistic</button>
+      <button class="choice-box" type="button">Undecided</button>
+    </div>
+  </section>
+  <script src="script.js"></script>
+</body>
+</html>
