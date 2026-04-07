@@ -20,12 +20,23 @@
   </section>
   <section class="choice-screen hidden" id="choice-screen" aria-live="polite">
     <h2 class="choice-title">Choose a Path, <span id="user-name">Visitor</span></h2>
-    <div class="choice-grid">
-      <button class="choice-box" type="button">Curious</button>
-      <button class="choice-box" type="button">Skeptical</button>
-      <button class="choice-box" type="button">Optimistic</button>
-      <button class="choice-box" type="button">Undecided</button>
+    <div class="journey-panel">
+      <div class="journey-head">
+        <p class="journey-label">Learning Journey</p>
+        <p class="mana-count"><span id="mana-value">0</span>/100 Mana</p>
+      </div>
+      <div class="mana-track" aria-label="Learning progress">
+        <div class="mana-fill" id="mana-fill"></div>
+      </div>
     </div>
+    <div class="choice-grid">
+      <button class="choice-box progress-box" type="button" data-mana="25">Professor 1</button>
+      <button class="choice-box progress-box" type="button" data-mana="25">Professor 2</button>
+      <button class="choice-box progress-box" type="button" data-mana="25">Professor 3</button>
+      <button class="choice-box progress-box" type="button" data-mana="25">Professor 4</button>
+      <button class="choice-box unlock-box hidden" id="fifth-path" type="button">Final Insight</button>
+    </div>
+    <p class="journey-note" id="journey-note">Gather mana by exploring all four professor paths.</p>
   </section>
   <script src="script.js"></script>
 </body>

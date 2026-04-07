@@ -208,6 +208,57 @@ body.red-mode::before {
   grid-template-columns: repeat(2, minmax(160px, 1fr));
 }
 
+.journey-panel {
+  width: min(94vw, 760px);
+  background: linear-gradient(180deg, rgba(36, 14, 14, 0.92), rgba(22, 10, 10, 0.94));
+  border: 1px solid rgba(255, 115, 115, 0.35);
+  border-radius: 12px;
+  padding: 0.75rem 0.9rem 0.9rem;
+  box-shadow:
+    0 0 0 1px rgba(255, 90, 90, 0.15),
+    0 0 20px rgba(132, 25, 25, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.journey-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.8rem;
+}
+
+.journey-label,
+.mana-count {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #ffdada;
+}
+
+.mana-count {
+  color: #ffbcbc;
+  font-weight: 600;
+}
+
+.mana-track {
+  margin-top: 0.55rem;
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(24, 8, 8, 0.85);
+  border: 1px solid rgba(255, 120, 120, 0.3);
+  overflow: hidden;
+}
+
+.mana-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #9e1f1f, #ff5f5f);
+  box-shadow:
+    0 0 10px rgba(255, 91, 91, 0.7),
+    0 0 16px rgba(255, 91, 91, 0.45);
+  transition: width 280ms ease;
+}
+
 .choice-box {
   border: 1px solid rgba(255, 120, 120, 0.45);
   border-radius: 12px;
@@ -236,4 +287,33 @@ body.red-mode::before {
 
 .choice-box:active {
   transform: translateY(0);
+}
+
+.choice-box.claimed {
+  border-color: rgba(255, 186, 186, 0.4);
+  background: linear-gradient(180deg, #3d2323, #261616);
+  color: #ffdede;
+  box-shadow:
+    0 0 0 1px rgba(255, 182, 182, 0.3),
+    0 0 18px rgba(203, 80, 80, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.unlock-box {
+  grid-column: 1 / -1;
+  min-height: 86px;
+  border-color: rgba(255, 216, 145, 0.7);
+  background: linear-gradient(180deg, #5d2f2f, #3f1f1f);
+  color: #ffecc8;
+  box-shadow:
+    0 0 0 1px rgba(255, 210, 130, 0.35),
+    0 0 24px rgba(255, 170, 79, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.journey-note {
+  margin: 0.1rem 0 0;
+  text-align: center;
+  color: #e4b0b0;
+  font-size: 0.92rem;
 }
