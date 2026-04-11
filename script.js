@@ -318,7 +318,7 @@ function initJourneyChat(displayName) {
   nameSpan.id = "user-name";
   nameSpan.textContent = displayName || "Visitor";
   const welcomeSuffix = document.createTextNode(
-    ". Type 1–4 or a topic name below, then Send. In each topic, open Examples 1–2 for full Knowledge. Complete all four topics for Final Insight."
+    ". Type 1–4 or a topic name below, then Send. In each topic, open both example chats — bad use and good use — for full Knowledge. Complete all four topics for Final Insight."
   );
   p2.appendChild(welcomePrefix);
   p2.appendChild(nameSpan);
@@ -337,7 +337,7 @@ function initJourneyChat(displayName) {
 }
 
 function splitViewGuideFirst() {
-  return "Examples on the left, research notes on the right. Open Example 1 and Example 2 to earn the full Knowledge slice for this topic. Use Back to topic chat when finished.";
+  return "Examples on the left, research notes on the right. Open Example of bad use and Example of good use to earn the full Knowledge slice for this topic. Use Back to topic chat when finished.";
 }
 
 function splitViewGuideAgain() {
@@ -438,7 +438,7 @@ function openTopic(label, userFacingLine) {
     if (fifthPath && fifthPath.disabled) {
       appendThreadMessage(
         journeyThread,
-        "Final Insight is locked until each topic is complete: open the section and view Examples 1–2 (Topic list on the right).",
+        "Final Insight is locked until each topic is complete: open the section and view both example chats — bad use and good use (Topic list on the right).",
         "ai"
       );
       journeyThread.scrollTop = journeyThread.scrollHeight;
@@ -594,7 +594,7 @@ if (backToJourneyChat) {
     journeyThread.scrollTop = journeyThread.scrollHeight;
     if (journeyNote && currentKnowledge < maxKnowledge) {
       journeyNote.textContent =
-        "Open topics from the chat; use Examples 1–2 in each topic for full Knowledge.";
+        "Open topics from the chat; view both example chats (bad use and good use) in each topic for full Knowledge.";
     }
     if (journeyInput) {
       journeyInput.focus();

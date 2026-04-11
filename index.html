@@ -40,7 +40,7 @@
           type="button"
           disabled
           aria-disabled="true"
-          aria-label="Final Insight, locked. Complete all four topics and Examples 1–2 in each to unlock."
+          aria-label="Final Insight, locked. Complete all four topics and open both example chats (bad use and good use) in each to unlock."
         >
           <span class="final-btn-line">
             <span class="final-lock-icons" aria-hidden="true">
@@ -83,7 +83,7 @@
                 <button type="submit" id="journey-submit">Send</button>
               </form>
             </div>
-            <p class="journey-note" id="journey-note">Open topics from the chat; use Examples 1–2 in each topic for full Knowledge.</p>
+            <p class="journey-note" id="journey-note">Open topics from the chat; view both example chats (bad use and good use) in each topic for full Knowledge.</p>
         </div>
       </div>
       <aside class="topic-progress-rail" aria-label="Topic list">
@@ -125,9 +125,29 @@
           <header class="split-example-header">
             <p class="split-example-title">Example conversations</p>
           </header>
-          <div class="example-tabs" role="tablist" aria-label="Chat examples">
-            <button type="button" class="example-tab is-active" role="tab" aria-selected="true" id="tab-ex-1" aria-controls="example-thread" data-example-id="1">Example 1</button>
-            <button type="button" class="example-tab" role="tab" aria-selected="false" id="tab-ex-2" aria-controls="example-thread" data-example-id="2">Example 2</button>
+          <div class="example-tabs" role="tablist" aria-label="Bad use and good use examples">
+            <button
+              type="button"
+              class="example-tab is-active"
+              role="tab"
+              aria-selected="true"
+              id="tab-ex-1"
+              aria-controls="example-thread"
+              data-example-id="1"
+            >
+              Example of bad use
+            </button>
+            <button
+              type="button"
+              class="example-tab"
+              role="tab"
+              aria-selected="false"
+              id="tab-ex-2"
+              aria-controls="example-thread"
+              data-example-id="2"
+            >
+              Example of good use
+            </button>
           </div>
           <div class="example-thread-wrap">
             <div class="chat-thread example-thread" id="example-thread" role="tabpanel" aria-labelledby="tab-ex-1"></div>

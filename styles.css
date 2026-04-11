@@ -976,8 +976,10 @@ body.red-mode .journey-chat-shell {
   background: #2e2e2e;
   color: #c8c8c8;
   border-radius: 6px;
-  padding: 0.25rem 0.42rem;
-  font-size: 0.68rem;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.72rem;
+  line-height: 1.25;
+  text-align: center;
   cursor: pointer;
 }
 
