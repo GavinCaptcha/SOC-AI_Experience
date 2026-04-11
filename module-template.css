@@ -1,0 +1,102 @@
+:root {
+  --bg: #0b1210;
+  --panel: #15211d;
+  --panel-border: #2f4b3f;
+  --accent: #8de0aa;
+  --text: #e7f2ec;
+  --muted: #a7beb2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+html,
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #15251f, #0a110f 55%);
+  color: var(--text);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: 100%;
+  max-height: 100vh;
+  max-height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: min(940px, 94vw);
+  max-width: 100%;
+  margin: 0 auto;
+  padding: max(0.65rem, env(safe-area-inset-top, 0px)) max(1rem, env(safe-area-inset-right, 0px))
+    max(1rem, env(safe-area-inset-bottom, 0px)) max(1rem, env(safe-area-inset-left, 0px));
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.top-nav {
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  margin: 0 0 0.15rem;
+  padding: 0.35rem 0 0.55rem;
+  background: linear-gradient(180deg, #0a110f 0%, #0a110f 55%, rgba(10, 17, 15, 0));
+}
+
+.top-nav a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.hero,
+.card {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: linear-gradient(180deg, #1a2a24, var(--panel));
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+}
+
+.hero h1 {
+  margin: 0 0 0.45rem;
+  font-size: 1.5rem;
+}
+
+.hero p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.card h2 {
+  margin: 0 0 0.45rem;
+  font-size: 1.04rem;
+  color: #dff7e8;
+}
+
+.placeholder {
+  margin: 0;
+  color: #d6e7de;
+  line-height: 1.45;
+}

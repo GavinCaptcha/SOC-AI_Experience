@@ -1,0 +1,71 @@
+/* Aligns Final Insight page with the journey chat column (between knowledge panel and topic rail). */
+
+.final-insight-page {
+  --journey-edge-left: max(0.65rem, env(safe-area-inset-left, 0px));
+  --journey-edge-right: max(0.65rem, env(safe-area-inset-right, 0px));
+  --journey-panel-w: min(92px, 16vw);
+  --journey-rail-w: clamp(200px, 22vw, 260px);
+  --journey-slab-gap: 0.5rem;
+  --journey-left-slab: calc(var(--journey-edge-left) + var(--journey-panel-w) + 0.75rem);
+  --journey-right-slab: calc(var(--journey-edge-right) + var(--journey-rail-w) + var(--journey-slab-gap));
+  --journey-chat-w: min(
+    96vw,
+    980px,
+    max(17rem, calc(100vw - var(--journey-left-slab) - var(--journey-right-slab) - 0.25rem))
+  );
+
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: 100%;
+  max-height: 100vh;
+  max-height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0 var(--journey-right-slab) 0 var(--journey-left-slab);
+  box-sizing: border-box;
+}
+
+.final-insight-page main {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  max-width: var(--journey-chat-w);
+  margin: 0 auto;
+  padding-top: max(0.65rem, env(safe-area-inset-top, 0px));
+  padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: stretch;
+  -webkit-overflow-scrolling: touch;
+}
+
+.final-insight-page .card {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 900px) {
+  .final-insight-page {
+    padding-left: max(0.65rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.65rem, env(safe-area-inset-right, 0px));
+  }
+
+  .final-insight-page main {
+    max-width: min(96vw, 980px);
+    padding-left: max(0.5rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.5rem, env(safe-area-inset-right, 0px));
+  }
+}
+
+@media (max-width: 720px) {
+  .final-insight-page {
+    --journey-panel-w: min(80px, 19vw);
+  }
+}

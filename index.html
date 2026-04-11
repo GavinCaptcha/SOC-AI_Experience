@@ -7,39 +7,172 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <section class="page-content" id="login-screen" role="main">
-    <h1 class="project-title">
-      What Does Your Professor Think of
-      <span class="animated-term" id="animated-term">AI</span>
-    </h1>
-    <main class="login-box">
-      <h2>Shall we find out together?</h2>
-      <form class="name-form" id="name-form" action="#" method="post">
-        <label for="name">Enter your name</label>
-        <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required />
-        <button type="submit">Continue</button>
+  <div class="viewport-edge" aria-hidden="true"></div>
+  <div class="learn-atmosphere" aria-hidden="true"></div>
+  <section class="chat-screen" id="login-screen" role="main">
+    <div class="chat-shell">
+      <header class="chat-top">
+        <div class="chat-status-dot" aria-hidden="true"></div>
+        <p class="chat-title">AI Guide</p>
+      </header>
+      <div class="chat-thread" id="intro-thread" aria-live="polite" aria-atomic="false"></div>
+      <form class="chat-entry" id="name-form" action="#" method="post">
+        <label class="sr-only" for="chat-name">Type your name</label>
+        <input
+          id="chat-name"
+          name="name"
+          type="text"
+          placeholder="Type your name..."
+          autocomplete="name"
+          required
+          disabled
+        />
+        <button type="submit" id="chat-submit" disabled>Send</button>
       </form>
-    </main>
+    </div>
   </section>
   <section class="choice-screen hidden" id="choice-screen" aria-live="polite">
-    <h2 class="choice-title">Choose a Path, <span id="user-name">Visitor</span></h2>
-    <div class="journey-panel">
-      <div class="journey-head">
-        <p class="journey-label">Learning Journey</p>
-        <p class="mana-count"><span id="mana-value">0</span>/100 Mana</p>
+    <aside class="journey-panel" aria-label="Knowledge progress and Final Insight">
+      <div class="journey-final-wrap">
+        <button
+          class="choice-box unlock-box is-locked journey-final-btn"
+          id="fifth-path"
+          type="button"
+          disabled
+          aria-disabled="true"
+          aria-label="Final Insight, locked. Complete all four topics and Examples 1–2 in each to unlock."
+        >
+          <span class="final-btn-line">
+            <span class="final-lock-icons" aria-hidden="true">
+              <svg class="final-icon final-icon--locked" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <rect x="5" y="11" width="14" height="11" rx="2" stroke="currentColor" stroke-width="2" />
+                <path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg>
+              <svg class="final-icon final-icon--open" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <rect x="5" y="11" width="14" height="11" rx="2" stroke="currentColor" stroke-width="2" />
+                <path d="M8 11V7a4 4 0 0 1 7.5-1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </span>
+            <span class="final-btn-label">Final Insight</span>
+          </span>
+        </button>
       </div>
-      <div class="mana-track" aria-label="Learning progress">
-        <div class="mana-fill" id="mana-fill"></div>
+      <div class="knowledge-track" aria-label="Knowledge progress">
+        <div class="knowledge-fill" id="knowledge-fill"></div>
+      </div>
+    </aside>
+    <div class="choice-main-area">
+    <div class="journey-selection" id="journey-selection">
+      <div class="journey-chat-screen-match">
+        <div class="journey-chat-column">
+          <div class="journey-chat-shell">
+              <header class="chat-top journey-chat-top">
+                <div class="chat-status-dot" aria-hidden="true"></div>
+                <p class="chat-title">Journey Guide</p>
+              </header>
+              <div class="chat-thread journey-thread" id="journey-thread" aria-live="polite" aria-atomic="false"></div>
+              <form class="chat-entry journey-chat-entry" id="journey-form" action="#" method="post">
+                <label class="sr-only" for="journey-input">Ask to explore a topic</label>
+                <input
+                  id="journey-input"
+                  name="topic"
+                  type="text"
+                  placeholder="1–4 or topic name, then Send"
+                  autocomplete="off"
+                />
+                <button type="submit" id="journey-submit">Send</button>
+              </form>
+            </div>
+            <p class="journey-note" id="journey-note">Open topics from the chat; use Examples 1–2 in each topic for full Knowledge.</p>
+        </div>
+      </div>
+      <aside class="topic-progress-rail" aria-label="Topic list">
+          <p class="topic-rail-heading">Topic list</p>
+          <div class="topic-slot progress-box" data-knowledge="25" data-label="Professor 1" role="status">
+            <span class="topic-slot-icon" aria-hidden="true">○</span>
+            <div class="topic-slot-body">
+              <span class="topic-slot-title">Independent Skills</span>
+              <span class="topic-slot-status">Not visited yet</span>
+            </div>
+          </div>
+          <div class="topic-slot progress-box" data-knowledge="25" data-label="Professor 2" role="status">
+            <span class="topic-slot-icon" aria-hidden="true">○</span>
+            <div class="topic-slot-body">
+              <span class="topic-slot-title">Healthy Use</span>
+              <span class="topic-slot-status">Not visited yet</span>
+            </div>
+          </div>
+          <div class="topic-slot progress-box" data-knowledge="25" data-label="Professor 3" role="status">
+            <span class="topic-slot-icon" aria-hidden="true">○</span>
+            <div class="topic-slot-body">
+              <span class="topic-slot-title">Effects of AI on fields</span>
+              <span class="topic-slot-status">Not visited yet</span>
+            </div>
+          </div>
+          <div class="topic-slot progress-box" data-knowledge="25" data-label="Professor 4" role="status">
+            <span class="topic-slot-icon" aria-hidden="true">○</span>
+            <div class="topic-slot-body">
+              <span class="topic-slot-title">Future Implementation</span>
+              <span class="topic-slot-status">Not visited yet</span>
+            </div>
+          </div>
+      </aside>
+    </div>
+
+    <div class="split-explore hidden" id="split-explore" aria-hidden="true">
+      <div class="split-explore-inner">
+        <div class="split-pane split-example-chat" role="region" aria-label="Example AI chat">
+          <header class="split-example-header">
+            <p class="split-example-title">Example conversations</p>
+          </header>
+          <div class="example-tabs" role="tablist" aria-label="Chat examples">
+            <button type="button" class="example-tab is-active" role="tab" aria-selected="true" id="tab-ex-1" aria-controls="example-thread" data-example-id="1">Example 1</button>
+            <button type="button" class="example-tab" role="tab" aria-selected="false" id="tab-ex-2" aria-controls="example-thread" data-example-id="2">Example 2</button>
+          </div>
+          <div class="example-thread-wrap">
+            <div class="chat-thread example-thread" id="example-thread" role="tabpanel" aria-labelledby="tab-ex-1"></div>
+          </div>
+        </div>
+        <div class="split-pane split-research" role="region" aria-label="Research and notes">
+          <button type="button" class="back-to-journey-btn" id="back-to-journey-chat">← Back to topic chat</button>
+          <p class="split-nav-hint" id="split-nav-hint"></p>
+          <div class="split-research-grid">
+            <article class="module-card split-research-card split-research-card--collected">
+              <h4>Collected Data</h4>
+              <p id="split-module-collected">Add key data points, evidence, and source notes here.</p>
+            </article>
+            <article class="module-card split-research-card split-research-card--quotes">
+              <h4>Professor quotes</h4>
+              <p class="split-research-quotes-body" id="split-module-quotes">Add direct quotes from professors here (with attribution when you have it).</p>
+            </article>
+            <article class="module-card split-research-card split-research-card--refined">
+              <h4>Refined Insights</h4>
+              <p id="split-module-refined">Add interpreted findings and practical takeaways here.</p>
+            </article>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="choice-grid">
-      <button class="choice-box progress-box" type="button" data-mana="25">Professor 1</button>
-      <button class="choice-box progress-box" type="button" data-mana="25">Professor 2</button>
-      <button class="choice-box progress-box" type="button" data-mana="25">Professor 3</button>
-      <button class="choice-box progress-box" type="button" data-mana="25">Professor 4</button>
-      <button class="choice-box unlock-box hidden" id="fifth-path" type="button">Final Insight</button>
     </div>
-    <p class="journey-note" id="journey-note">Gather mana by exploring all four professor paths.</p>
+
+    <div
+      class="final-insight-modal hidden"
+      id="final-insight-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="final-insight-heading"
+      aria-hidden="true"
+    >
+      <button type="button" class="final-insight-backdrop" id="final-insight-backdrop" tabindex="-1" aria-label="Close conclusion"></button>
+      <div class="final-insight-panel">
+        <header class="final-insight-head">
+          <h2 id="final-insight-heading">Final Insight</h2>
+          <button type="button" class="final-insight-close" id="final-insight-close">Close</button>
+        </header>
+        <p class="final-insight-lead" id="final-insight-lead">A conclusion drawn from the documentary work and professor perspectives.</p>
+        <div class="final-insight-body" id="final-insight-conclusion"></div>
+      </div>
+    </div>
   </section>
   <script src="script.js"></script>
 </body>
