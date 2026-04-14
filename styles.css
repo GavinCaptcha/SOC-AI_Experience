@@ -641,10 +641,11 @@ body.red-mode .journey-thread {
   max-width: 100%;
 }
 
-.journey-intro-title {
-  display: block;
-  margin-bottom: 0.45rem;
-  font-size: 1.2rem;
+.journey-intro-headline {
+  margin: 0 0 0.55rem;
+  font-weight: 700;
+  font-size: calc(0.94rem + 3pt);
+  line-height: 1.35;
   color: var(--ui-grey-100);
 }
 

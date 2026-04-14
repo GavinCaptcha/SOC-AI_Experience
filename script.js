@@ -164,7 +164,7 @@ In models like ChatGPT, you can customize the types of responses that you will b
 Procedures like this will help steer us away from the negative uses of AI. And help to keep students progressing through their work.`
   },
   "Professor 3": {
-    title: "Effects of AI in the Field",
+    title: "Effects of AI in the fields of Research",
     collected: `Professors were able to give good feedback on how they view the use of AI in their respective field. Most have been aware of the rise of artificial intelligence. And have already seen examples of integration in recent times.
 
 The outlook depended heavily on the type of work that professors had experience in. With those who work in a more social environment feeling hesitant to incorporate AI. And those in a more technology focused field feel as if it was an eventuality. With those in the social arts claiming that much of the work that AI is doing to be statistical. Taking the numbers found by experts and parsing, formatting, and presenting the data. While this is a time saver, it does not introduce any new concepts. Just streamlining pre-existing processes.
@@ -362,7 +362,7 @@ function setActiveExampleTab(id) {
   }
 }
 
-function initJourneyChat(displayName) {
+function initJourneyChat(_displayName) {
   if (journeyChatInitialized || !journeyThread) {
     return;
   }
@@ -370,36 +370,30 @@ function initJourneyChat(displayName) {
 
   const introWrap = document.createElement("div");
   introWrap.className = "chat-bubble ai journey-intro-bubble";
-  const titleEl = document.createElement("strong");
-  titleEl.className = "journey-intro-title";
-  titleEl.textContent = "Gavin's Social Documentary";
-  introWrap.appendChild(titleEl);
 
-  const p1 = document.createElement("p");
-  p1.className = "journey-intro-p";
-  p1.textContent = "Clarkson professors on AI in academics and in their fields.";
-  introWrap.appendChild(p1);
+  const headline = document.createElement("p");
+  headline.className = "journey-intro-headline";
+  headline.textContent =
+    'Hello! And welcome to Gavin\'s social documentary "Professors and the rise of artificial intelligence: View from both sides".';
+  introWrap.appendChild(headline);
 
-  const p2 = document.createElement("p");
-  p2.className = "journey-intro-p";
-  const welcomePrefix = document.createTextNode("Welcome, ");
-  const nameSpan = document.createElement("span");
-  nameSpan.id = "user-name";
-  nameSpan.textContent = displayName || "Visitor";
-  const welcomeSuffix = document.createTextNode(
-    ". Type 1–3 or a topic name below, then Send. In each topic, open both example chats — bad use and good use — for full Knowledge. Complete all three topics for Final Insight."
-  );
-  p2.appendChild(welcomePrefix);
-  p2.appendChild(nameSpan);
-  p2.appendChild(welcomeSuffix);
-  introWrap.appendChild(p2);
+  const pNav = document.createElement("p");
+  pNav.className = "journey-intro-p";
+  pNav.textContent =
+    "This chat is where you will navigate the topics of this documentary. Listed on the topic list located on the right of the screen. Once you select a section to explore. You can explore the findings, supported by quotes of the professors. Along with the refined version of the data, where Gavin has presented material that can help define how we use AI. As well as examples of bad and good use of AI. Each catered to display a different perspective based on the topic.";
+  introWrap.appendChild(pNav);
+
+  const pEnjoy = document.createElement("p");
+  pEnjoy.className = "journey-intro-p";
+  pEnjoy.textContent = "Please enjoy!";
+  introWrap.appendChild(pEnjoy);
 
   journeyThread.appendChild(introWrap);
 
   const hintTopics = document.createElement("div");
   hintTopics.className = "chat-bubble ai journey-guide-bubble";
   hintTopics.textContent =
-    "1 · Independent Skills\n2 · Healthy Use\n3 · Effects of AI in the Field";
+    "Please select the topic that you would like to explore:\n1. Independent Skills\n2. Healthy Use\n3. Effects of AI in the fields of Research";
   journeyThread.appendChild(hintTopics);
 
   journeyThread.scrollTop = journeyThread.scrollHeight;
