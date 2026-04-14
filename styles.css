@@ -1423,20 +1423,6 @@ body.split-explore-open .journey-panel {
   transform: translateY(-2px);
 }
 
-.journey-note {
-  margin: 0.5rem 0 0.25rem;
-  text-align: center;
-  max-width: min(92vw, 640px);
-  align-self: center;
-  color: #a8a8a8;
-  font-size: 0.92rem;
-  transition: color 1.2s ease;
-}
-
-body.red-mode .journey-note {
-  color: color-mix(in srgb, #b8e0c8 calc(var(--knowledge-progress) * 100%), #a8a8a8 calc((1 - var(--knowledge-progress)) * 100%));
-}
-
 .module-card {
   border: 1px solid rgba(70, 70, 70, 0.9);
   border-radius: 10px;

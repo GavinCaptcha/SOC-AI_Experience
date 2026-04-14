@@ -7,7 +7,6 @@ const introThread = document.getElementById("intro-thread");
 const knowledgeFill = document.getElementById("knowledge-fill");
 const topicProgressSlots = Array.from(document.querySelectorAll(".topic-slot.progress-box"));
 const fifthPath = document.getElementById("fifth-path");
-const journeyNote = document.getElementById("journey-note");
 const learnAtmosphere = document.querySelector(".learn-atmosphere");
 const journeyThread = document.getElementById("journey-thread");
 const journeyForm = document.getElementById("journey-form");
@@ -535,9 +534,6 @@ function openTopic(label, userFacingLine) {
     appendThreadMessage(journeyThread, userFacingLine, "user");
     appendThreadMessage(journeyThread, "Closing reflection — close the window when you’re done.", "ai");
     showFinalInsightModal();
-    if (journeyNote) {
-      journeyNote.textContent = "Final Insight is open — close the window when you’re done reading.";
-    }
     journeyThread.scrollTop = journeyThread.scrollHeight;
     return;
   }
@@ -548,9 +544,6 @@ function openTopic(label, userFacingLine) {
 
   showSplitView(label, { isRevisit: priorProgress > 0 });
 
-  if (journeyNote) {
-    journeyNote.textContent = "Split view — use Back to topic chat when finished.";
-  }
   journeyThread.scrollTop = journeyThread.scrollHeight;
 }
 
@@ -600,9 +593,6 @@ function renderKnowledge() {
       "aria-label",
       "Final Insight, unlocked. Click to open the conclusion."
     );
-    if (journeyNote) {
-      journeyNote.textContent = "All paths explored. Final Insight is ready.";
-    }
   }
 }
 
@@ -675,14 +665,10 @@ if (backToJourneyChat) {
     appendThreadMessage(journeyThread, "Welcome back to chat!", "ai");
     appendThreadMessage(
       journeyThread,
-      "Please select which topic you would like to view next (1-3). And view all to unlock the final insight",
+      "Please select which topic you would like to view next (1-3). And view all to unlock the final insight.",
       "ai"
     );
     journeyThread.scrollTop = journeyThread.scrollHeight;
-    if (journeyNote && currentKnowledge < maxKnowledge) {
-      journeyNote.textContent =
-        "Open topics from the chat; view both example chats (bad use and good use) in each topic for full Knowledge.";
-    }
     if (journeyInput) {
       journeyInput.focus();
     }
