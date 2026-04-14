@@ -374,7 +374,7 @@ function initJourneyChat(displayName) {
   const headline = document.createElement("p");
   headline.className = "journey-intro-headline";
   headline.textContent =
-    'Hello! And welcome to Gavin\'s social documentary "Professors and the rise of artificial intelligence: View from both sides".';
+    "Hello! And welcome to Gavin's social documentary Professors and the rise of artificial intelligence: View from both sides.";
   introWrap.appendChild(headline);
 
   const pNav = document.createElement("p");
@@ -385,7 +385,7 @@ function initJourneyChat(displayName) {
 
   const pEnjoy = document.createElement("p");
   pEnjoy.className = "journey-intro-p";
-  pEnjoy.textContent = `Please enjoy ${nameForEnjoy}!`;
+  pEnjoy.textContent = `Please enjoy, ${nameForEnjoy}!`;
   introWrap.appendChild(pEnjoy);
 
   journeyThread.appendChild(introWrap);
