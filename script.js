@@ -25,7 +25,6 @@ const finalInsightClose = document.getElementById("final-insight-close");
 const finalInsightBackdrop = document.getElementById("final-insight-backdrop");
 
 const introMessages = [
-  "Welcome to Gavin's Social Documentary.",
   "As AI becomes more and more prominent in the modern world. We as a people need to be spending more time better understanding how it impacts our society. With the speed and rate at which these programs are updated and tailored. It is up to us, the consumers, to define and develop better methods not only on how we use AI. But also develop a mechanism to better identify when we shouldn't use AI. I propose that to accomplish this, we need to all work together.",
   "In this experience, I will be presenting different perspectives I have gathered from Clarkson Professors. And outlining what they think about AI. In terms of academics, how they feel it affects the student body. As well as the impacts it has on the fields they research.",
   "To begin, please type your name in the chat."
@@ -361,11 +360,13 @@ function setActiveExampleTab(id) {
   }
 }
 
-function initJourneyChat(_displayName) {
+function initJourneyChat(displayName) {
   if (journeyChatInitialized || !journeyThread) {
     return;
   }
   journeyChatInitialized = true;
+
+  const nameForEnjoy = (displayName || "Visitor").trim() || "Visitor";
 
   const introWrap = document.createElement("div");
   introWrap.className = "chat-bubble ai journey-intro-bubble";
@@ -384,7 +385,7 @@ function initJourneyChat(_displayName) {
 
   const pEnjoy = document.createElement("p");
   pEnjoy.className = "journey-intro-p";
-  pEnjoy.textContent = "Please enjoy!";
+  pEnjoy.textContent = `Please enjoy (${nameForEnjoy})!`;
   introWrap.appendChild(pEnjoy);
 
   journeyThread.appendChild(introWrap);
