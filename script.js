@@ -385,7 +385,7 @@ function initJourneyChat(displayName) {
 
   const pEnjoy = document.createElement("p");
   pEnjoy.className = "journey-intro-p";
-  pEnjoy.textContent = `Please enjoy (${nameForEnjoy})!`;
+  pEnjoy.textContent = `Please enjoy ${nameForEnjoy}!`;
   introWrap.appendChild(pEnjoy);
 
   journeyThread.appendChild(introWrap);
