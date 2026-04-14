@@ -16,7 +16,6 @@ const journeySelection = document.getElementById("journey-selection");
 const splitExplore = document.getElementById("split-explore");
 const backToJourneyChat = document.getElementById("back-to-journey-chat");
 const splitModuleCollected = document.getElementById("split-module-collected");
-const splitModuleQuotes = document.getElementById("split-module-quotes");
 const splitModuleRefined = document.getElementById("split-module-refined");
 const splitNavHint = document.getElementById("split-nav-hint");
 const exampleThread = document.getElementById("example-thread");
@@ -34,7 +33,7 @@ const introMessages = [
 ];
 
 let currentKnowledge = 0;
-const maxKnowledge = 100;
+const maxKnowledge = 75;
 /** Max knowledge points per professor topic (split across enter + 2 example tabs). */
 const KNOWLEDGE_PER_TOPIC = 25;
 /** @type {Record<string, { enter: boolean; ex1: boolean; ex2: boolean }>} */
@@ -66,12 +65,59 @@ exampleConversationStore["Professor 1"] = {
     { role: "ai", text: "What can I help you with today?" },
     {
       role: "user",
-      text: "I have this project that I need to finish, but I do not know how to properly build it. Can you take this instruction set and create it for me?"
+      text: "I have this project that I need to finish, but I do not know how to properly build it. Can you test my thoughts and understanding of the material? I want to strengthen my deep learning in this topic."
     },
-    { role: "ai", text: "Absolutely! Please upload the instructions and I will get started." },
-    { role: "user", file: { name: "Project_Instructions.docx" } },
-    { role: "ai", text: "I've built this from your instructions. Here's the completed project." },
-    { role: "ai", file: { name: "Completed_Project.zip" } }
+    { role: "ai", text: "Absolutely! Let me see what kind of material we are working on. Then we can start learning in more detail." },
+    { role: "user", text: "The project is focused on maps and queues. Can we start with those two topics first?" },
+    { role: "ai", text: "Let's get started and tackle these topics together." }
+  ]
+};
+
+exampleConversationStore["Professor 2"] = {
+  "1": [
+    { role: "user", text: "Here is all my homework for the class that I have. It is due tonight, can you give me all the answers." },
+    { role: "user", file: { name: "Homework_Assignment.pdf" } },
+    { role: "ai", text: "Sure! I can absolutely give you those answers. Would you like me to explain how I come to the conclusions?" },
+    { role: "user", text: "No thanks, just give me the solutions and I'll worry about learning the concepts later." },
+    { role: "ai", text: "Of course, here are all the solutions to the homework." },
+    { role: "ai", file: { name: "Homework_Solutions.pdf" } }
+  ],
+  "2": [
+    {
+      role: "user",
+      text: "In class we are covering the concept of divergence, but I am having a really hard time wrapping my head around the idea. Can you explain it to me in an uncomplicated way?"
+    },
+    {
+      role: "ai",
+      text: "Sure! Let me start by explaining the concept of divergence to you step by step. If you want, you could upload some work and I could take you through the process of solving problems."
+    },
+    { role: "user", text: "No thanks, I would like to get a firm understanding of the basics first." },
+    { role: "ai", text: "Of course! Let's get started then." }
+  ]
+};
+
+exampleConversationStore["Professor 3"] = {
+  "1": [
+    { role: "ai", text: "Welcome to FakeCo's company AI assistant. How can I help you with your work today?" },
+    { role: "user", text: "I need to make a major push to the repository, and I am almost confident that everything works properly." },
+    { role: "ai", text: "That is a valid concern. Would you like for me to take a look over the code and make any changes that would fix up the program?" },
+    { role: "user", text: "Sure, go through and change what needs to be changed." },
+    {
+      role: "ai",
+      text: "I attempted to change the program's structure, but ran into a few issues. The fix I tried to implement seemed to break the entire system. Would you like me to try again?"
+    }
+  ],
+  "2": [
+    { role: "ai", text: "Welcome to FakeCo's company AI assistant. How can I help you with your work today?" },
+    {
+      role: "user",
+      text: "I have a main part of the program that I would like to push to the main repository. I am almost confident that everything works. Can you make the push?"
+    },
+    {
+      role: "ai",
+      text: "Sure I can push all materials to the repository! Would you like me to first go through and fix any potential problems that might arise?"
+    },
+    { role: "user", text: "No thank you, I am confident that if any problems arise I will be able to handle them on my own." }
   ]
 };
 
@@ -95,34 +141,57 @@ Artificial intelligence can be seen the same way. An incredible tool that can be
   },
   "Professor 2": {
     title: "Healthy Use",
-    collected: "Add key classroom observations, quotes, and source-backed findings for this topic here.",
-    quotes: "Add professor quotes here — include name or department when you can.",
-    refined: "Add synthesized insights and practical recommendations for encouraging healthy, intentional use of AI in academic work."
+    collected: `Each professor interviewed had different definitions of “healthy” use of AI. With some stating that there was no such thing as healthy use, and that any use of artificial intelligence was inherently bad for a student's academic career.
+
+With others claiming that it is very dependent on the students specific use. And that it ultimately fell upon the professor to teach students how to properly use AI. Incorporating it into a syllabus the same way a class would teach a program like solidworks. A tool that is to be used in the classroom, but not without the guidance of a faculty member.
+
+In this way, a professor could better monitor a student's interaction with artificial intelligence. And supply them with guidance when needed. Creating a more coherent student-professor-AI dynamic. 
+One professor described using AI in a lab setting. The same way that medical facilities treat viral diseases. That AI had the potential to change the way that we learn for the worst. And should not be treated lightly, but with care and diligence.`,
+    quotes: `“AI should be used cautiously and not replace human thinking. It should be treated more like a controlled research tool rather than something relied upon daily. There should be more awareness of its limitations and costs.” - Anthropology Professor
+
+“Students should use AI to support learning, not replace it. They should first understand concepts manually, then use AI to improve efficiency. Judgment and verification are critical skills when using AI.” - Computer Science Professor`,
+    refined: `These insights provide us with a good understanding of how professors view healthy use of AI. And shows how polarizing different faculty view its use. From the context of the whole conversation. I believe that this shift in prospective has a strong correlation with the individuals field of study 
+Professors with field experience in a more social setting had a better understanding of the effects AI has on the population. And may be more familiar with the likely negative influence it may have on the public. Resulting in a more cynical and skeptical view of artificial intelligence. And rightfully so, LLM’s have the potential to undermine our methods of education. This was a concern of each professor. Regardless of their willingness to incorporate into education. 
+
+So what is healthy use? It stems from a core understanding of artificial intelligence. Much like a power tool in a mechanics shop. You need to approach the concept of AI with an awareness of the power it holds. You need to be comfortable with your skills and have clear boundaries. Using AI to help with a late assignment seems like a blessing. Until you need to actively recall the information. And you find yourself drawing a blank.
+
+You need to give yourself the respect you deserve, and actively participate in the work you have. Using AI not as a solution to a problem. But as more of a blackboard, research article, or fellow classmate. A tool for learning. 
+
+TIP:
+
+In models like ChatGPT, you can customize the types of responses that you will be given. Taking the model away from solution based, to theory based. You can specifically tell you now to give you any answers. But instead  help guide you through the material.
+
+Procedures like this will help steer us away from the negative uses of AI. And help to keep students progressing through their work.`
   },
   "Professor 3": {
-    title: "The effects of AI on fields",
-    collected: "Add key field observations, quotes, and source-backed findings for this topic here.",
-    quotes: "Add professor quotes here — include name or department when you can.",
-    refined: "Add synthesized insights and practical recommendations about how AI is changing the professor's research field."
-  },
-  "Professor 4": {
-    title: "Future Implementation",
-    collected: "Add key field observations, quotes, and source-backed findings for this topic here.",
-    quotes: "Add professor quotes here — include name or department when you can.",
-    refined: "Add synthesized insights and practical recommendations for how AI could be well incorporated into the field going forward."
+    title: "Effects of AI in the Field",
+    collected: `Professors were able to give good feedback on how they view the use of AI in their respective field. Most have been aware of the rise of artificial intelligence. And have already seen examples of integration in recent times.
+
+The outlook depended heavily on the type of work that professors had experience in. With those who work in a more social environment feeling hesitant to incorporate AI. And those in a more technology focused field feel as if it was an eventuality. With those in the social arts claiming that much of the work that AI is doing to be statistical. Taking the numbers found by experts and parsing, formatting, and presenting the data. While this is a time saver, it does not introduce any new concepts. Just streamlining pre-existing processes.
+However, in the tech industry. More and more companies are developing their own chat bots for workers. As an attempt to keep their employees from using third party softwares. And keep company material within their own system. This is an example of how students may need to be trained to use AI, as trends show its movement towards becoming a key component in the workforce. Depending on the field that you choose to pursue.
+
+Each professor brought up the fact that AI has come and gone in relevance over the years. And for each major breakthrough, a new boom of interest is generated. This can be seen by the early development of neural networks. Being an initial boom in the 1950s - 1960s. And in recent years with the rapid adaption of deep learning. Artificial intelligence keeps changing. Professors expressed that we would not only need to keep up. But get ahead, and create methods and boundaries for safe and effective incorporation.`,
+    quotes: `“AI is like a tool (e.g., a circular saw). It increases productivity rather than replacing workers entirely. Jobs will change, and expertise will require understanding how to use AI tools effectively.
+Many companies now require AI use and have standardized tools. AI is integrated into workflows but still requires human oversight and decision-making. It typically handles only a portion of tasks.” - Computer Science Professor
+
+“In anthropology, we study AI in three ways: as a cultural artifact, as a research tool, and as something to critique. AI reveals something about its creators… a desire to avoid human interaction.” - Anthropology Professor
+
+“AI has gone through multiple hype cycles and will continue to evolve. It will change industries, but not always in predictable ways. Understanding its capabilities and limitations is essential for adapting to future developments.” - Computer Science Professor`,
+    refined: `On the topic of AI in the workforce, the answers that you will get vary greatly on the field of study. This makes sense, that each field would have specific tasks that might need AI implementation. And others that would not even have the capability for AI integration. 
+But regardless of this, each professor was underlining the importance of keeping attention. Staying in touch with the changes that come with the introduction of AI. For example, the custom made chat bots in industry. These are new resources for future workers. And might be seen as an essential area of knowledge. Then again, they may not prove to be as essential as some might think. Professors recommend understanding these expectations before going into the field. As well as defining how you as a person would like to see AI implemented in the future. 
+There is also the great possibility that artificial intelligence may die out. And become a passing phase. We can see examples of this in the past, with each major advancement. The tech hits the scene, stakes its claim, then fizzles out as people become bored. Regardless of its prominence, professors feel that artificial intelligence will change what it means to work in STEM. And encourage students to educate themselves on changes. Become familiar with how companies expect them to interact with AI. And be a part of the voice that stands out if we ever become too dependent.`
   },
   "Final Insight": {
     title: "Final Insight",
     conclusion:
-      "This project brought together Clarkson professors’ views on AI in academics and in their fields. Across topics, a recurring theme is balance: using AI as a tool without replacing the thinking, judgment, and skills students and professionals still need. Independent work, honest use of help, and clear expectations in courses and careers will shape whether AI supports learning or undermines it. As tools change, the conclusion that matters is collective—we define good use of AI by how we teach, assess, and model it in our own work."
+      "In conclusion, I have found that professors are much more experienced in AI than a student might assume. Many students feel that there exists this war between professors and AI. From my research, I have found some examples of this. But the majority of professors have complex and educated opinions on the topic of artificial intelligence.\n\nWith the main concern being that AI might comprise a student's education. They want the best for each student. And with the sudden appearance of artificial intelligence in the education system. They are learning and adapting, curriculums and syllabuses are changing appropriately. They see the flourishing of AI, and are identifying risks to their students. And doing the best they can to adapt to this new tool in education.\n\nIf there is one thing that you take away from this experience. It should be that we are all in this together. Artificial intelligence is new and exciting. And is being implemented in so many different ways each and every day. The education system is just one of those implementations. And the only way that we can figure out its best use in our world. We need to all work together. Because at the end of day, we are the consumers, and we define what we want from artificial intelligence. So better understanding each other's thoughts and concerns is essential. And should be promoted more in the modern education system."
   }
 };
 
 const topicAliases = [
   { key: "Professor 1", patterns: [/^1\b/, /\bindependent\b/i, /\bskills?\b/i] },
   { key: "Professor 2", patterns: [/^2\b/, /\bhealthy\b/i, /\buse\b/i] },
-  { key: "Professor 3", patterns: [/^3\b/, /\beffects?\b/i, /\bfields?\b/i, /\bresearch\b/i] },
-  { key: "Professor 4", patterns: [/^4\b/, /\bfuture\b/i, /\bimplementation\b/i] }
+  { key: "Professor 3", patterns: [/^3\b/, /\beffects?\b/i, /\bfields?\b/i, /\bresearch\b/i] }
 ];
 
 function ensureExampleStore(label) {
@@ -318,7 +387,7 @@ function initJourneyChat(displayName) {
   nameSpan.id = "user-name";
   nameSpan.textContent = displayName || "Visitor";
   const welcomeSuffix = document.createTextNode(
-    ". Type 1–4 or a topic name below, then Send. In each topic, open both example chats — bad use and good use — for full Knowledge. Complete all four topics for Final Insight."
+    ". Type 1–3 or a topic name below, then Send. In each topic, open both example chats — bad use and good use — for full Knowledge. Complete all three topics for Final Insight."
   );
   p2.appendChild(welcomePrefix);
   p2.appendChild(nameSpan);
@@ -330,7 +399,7 @@ function initJourneyChat(displayName) {
   const hintTopics = document.createElement("div");
   hintTopics.className = "chat-bubble ai journey-guide-bubble";
   hintTopics.textContent =
-    "1 · Independent Skills\n2 · Healthy Use\n3 · Effects of AI on fields\n4 · Future Implementation";
+    "1 · Independent Skills\n2 · Healthy Use\n3 · Effects of AI in the Field";
   journeyThread.appendChild(hintTopics);
 
   journeyThread.scrollTop = journeyThread.scrollHeight;
@@ -342,6 +411,34 @@ function splitViewGuideFirst() {
 
 function splitViewGuideAgain() {
   return "Same layout as before. Use Back to topic chat when finished.";
+}
+
+function renderCollectedPanel(content) {
+  if (!splitModuleCollected || !content) {
+    return;
+  }
+
+  splitModuleCollected.replaceChildren();
+  const collectedBody = document.createElement("p");
+  collectedBody.className = "split-collected-body";
+  collectedBody.textContent = content.collected || "";
+  splitModuleCollected.appendChild(collectedBody);
+
+  const quoteText = String(content.quotes || "").trim();
+  if (!quoteText) {
+    return;
+  }
+
+  const label = document.createElement("p");
+  label.className = "split-prof-quotes-label";
+  label.textContent = "Profesor Qoutes";
+
+  const quoteBody = document.createElement("p");
+  quoteBody.className = "split-prof-quotes-body";
+  quoteBody.textContent = quoteText;
+
+  splitModuleCollected.appendChild(label);
+  splitModuleCollected.appendChild(quoteBody);
 }
 
 function parseTopicInput(raw) {
@@ -402,10 +499,7 @@ function showSplitView(label, options = {}) {
 
   currentSplitLabel = label;
   ensureExampleStore(label);
-  splitModuleCollected.textContent = content.collected;
-  if (splitModuleQuotes) {
-    splitModuleQuotes.textContent = content.quotes ?? "";
-  }
+  renderCollectedPanel(content);
   splitModuleRefined.textContent = content.refined;
 
   tryAwardTopicChunk(label, "enter");
@@ -458,12 +552,6 @@ function openTopic(label, userFacingLine) {
 
   appendThreadMessage(journeyThread, userFacingLine, "user");
 
-  if (priorProgress > 0) {
-    appendThreadMessage(journeyThread, splitViewGuideAgain(), "ai");
-  } else {
-    appendThreadMessage(journeyThread, splitViewGuideFirst(), "ai");
-  }
-
   showSplitView(label, { isRevisit: priorProgress > 0 });
 
   if (journeyNote) {
@@ -494,7 +582,7 @@ function renderKnowledge() {
   const safe = Math.min(currentKnowledge, maxKnowledge);
   const ratio = safe / maxKnowledge;
   if (knowledgeFill) {
-    knowledgeFill.style.height = `${safe}%`;
+    knowledgeFill.style.height = `${Math.max(0, Math.min(100, ratio * 100))}%`;
   }
   document.body.style.setProperty("--knowledge-progress", String(ratio));
 
@@ -553,7 +641,7 @@ if (journeyForm && journeyInput && journeyThread) {
     if (!label) {
       appendThreadMessage(
         journeyThread,
-        "Try 1–4, a topic keyword, or Final Insight after all four are explored.",
+        "Try 1–3, a topic keyword, or Final Insight after all three are explored.",
         "ai"
       );
       journeyThread.scrollTop = journeyThread.scrollHeight;
@@ -590,7 +678,12 @@ if (fifthPath) {
 if (backToJourneyChat) {
   backToJourneyChat.addEventListener("click", () => {
     hideSplitView();
-    appendThreadMessage(journeyThread, "Back in chat — pick another topic below.", "ai");
+    appendThreadMessage(journeyThread, "Welcome back to chat!", "ai");
+    appendThreadMessage(
+      journeyThread,
+      "Please select which topic you would like to view next (1-3). And view all to unlock the final insight",
+      "ai"
+    );
     journeyThread.scrollTop = journeyThread.scrollHeight;
     if (journeyNote && currentKnowledge < maxKnowledge) {
       journeyNote.textContent =
@@ -634,7 +727,7 @@ document.addEventListener("keydown", (event) => {
 
 /**
  * Add a line to an example transcript (e.g. bad AI interactions). Persists per topic + example slot.
- * @param {string} label — "Professor 1" … "Professor 4" or "Final Insight"
+ * @param {string} label — "Professor 1" … "Professor 3" or "Final Insight"
  * @param {string} exampleId — "1" | "2"
  * @param {"user"|"ai"} role
  * @param {string} text

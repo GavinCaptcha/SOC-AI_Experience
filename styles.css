@@ -907,7 +907,7 @@ body.red-mode .journey-chat-shell {
   display: grid;
   gap: 0.65rem;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: minmax(0, 1fr);
   align-items: stretch;
 }
 
@@ -916,18 +916,18 @@ body.red-mode .journey-chat-shell {
   grid-row: 1;
 }
 
-.split-research-card--quotes {
-  grid-column: 1;
-  grid-row: 2;
-}
-
 .split-research-card--refined {
   grid-column: 2;
-  grid-row: 1 / -1;
+  grid-row: 1;
   align-self: stretch;
 }
 
 #split-module-collected {
+  margin: 0;
+}
+
+.split-collected-body {
+  margin: 0;
   white-space: pre-line;
 }
 
@@ -935,8 +935,16 @@ body.red-mode .journey-chat-shell {
   white-space: pre-line;
 }
 
-.split-research-quotes-body {
-  white-space: pre-wrap;
+.split-prof-quotes-label {
+  margin: 0 0 0.35rem;
+  padding-top: 2lh;
+  font-weight: 700;
+  color: #d7e6de;
+}
+
+.split-prof-quotes-body {
+  margin: 0;
+  white-space: pre-line;
   font-style: italic;
   color: #c8c8c8;
 }
@@ -1147,7 +1155,6 @@ body.split-explore-open .journey-panel {
   }
 
   .split-research-card--collected,
-  .split-research-card--quotes,
   .split-research-card--refined {
     grid-column: unset;
     grid-row: unset;

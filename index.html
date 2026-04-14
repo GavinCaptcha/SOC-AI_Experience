@@ -40,7 +40,7 @@
           type="button"
           disabled
           aria-disabled="true"
-          aria-label="Final Insight, locked. Complete all four topics and open both example chats (bad use and good use) in each to unlock."
+          aria-label="Final Insight, locked. Complete all three topics and open both example chats (bad use and good use) in each to unlock."
         >
           <span class="final-btn-line">
             <span class="final-lock-icons" aria-hidden="true">
@@ -77,7 +77,7 @@
                   id="journey-input"
                   name="topic"
                   type="text"
-                  placeholder="1–4 or topic name, then Send"
+                  placeholder="1–3 or topic name, then Send"
                   autocomplete="off"
                 />
                 <button type="submit" id="journey-submit">Send</button>
@@ -105,14 +105,7 @@
           <div class="topic-slot progress-box" data-knowledge="25" data-label="Professor 3" role="status">
             <span class="topic-slot-icon" aria-hidden="true">○</span>
             <div class="topic-slot-body">
-              <span class="topic-slot-title">Effects of AI on fields</span>
-              <span class="topic-slot-status">Not visited yet</span>
-            </div>
-          </div>
-          <div class="topic-slot progress-box" data-knowledge="25" data-label="Professor 4" role="status">
-            <span class="topic-slot-icon" aria-hidden="true">○</span>
-            <div class="topic-slot-body">
-              <span class="topic-slot-title">Future Implementation</span>
+              <span class="topic-slot-title">Effects of AI in the fields of research</span>
               <span class="topic-slot-status">Not visited yet</span>
             </div>
           </div>
@@ -159,11 +152,7 @@
           <div class="split-research-grid">
             <article class="module-card split-research-card split-research-card--collected">
               <h4>Collected Data</h4>
-              <p id="split-module-collected">Add key data points, evidence, and source notes here.</p>
-            </article>
-            <article class="module-card split-research-card split-research-card--quotes">
-              <h4>Professor quotes</h4>
-              <p class="split-research-quotes-body" id="split-module-quotes">Add direct quotes from professors here (with attribution when you have it).</p>
+              <div id="split-module-collected">Add key data points, evidence, and source notes here.</div>
             </article>
             <article class="module-card split-research-card split-research-card--refined">
               <h4>Refined Insights</h4>
